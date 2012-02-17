@@ -1,7 +1,8 @@
 package search;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.TreeMap;
 
 /**
  * @author O. Tedikova
@@ -9,8 +10,19 @@ import java.util.TreeMap;
  */
 public class PhraseGenerator {
 
-    public static void main(String[] args){
-        TreeMap<Integer,List<String>> phrases=new TreeMap<Integer, List<String>>();
+    public static List<Phrase> generatePhrases(Phrase phrase) {
+        List<Phrase> phrases = new ArrayList<Phrase>();
+        LinkedList<String> body = phrase.getBody();
+        Object[] words = body.toArray();
+        for (Object word : words) {
+            phrases.add(new Phrase(body));
+            body.removeLast();
+        }
+        return phrases;
+    }
+
+    public static void main(String[] args) {
+
 
     }
 }
