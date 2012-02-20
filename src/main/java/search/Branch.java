@@ -7,7 +7,15 @@ import java.util.LinkedList;
  * @version 1.0
  */
 public class Branch {
-    LinkedList<Phrase> elements = new LinkedList<Phrase>();
+    private LinkedList<Phrase> elements = new LinkedList<Phrase>();
+    private int level;
+
+    public Branch(int level) {
+        this.level = level;
+    }
 
 
+    public LinkedList<Phrase> getElements() {
+        return elements;
+    }
 }

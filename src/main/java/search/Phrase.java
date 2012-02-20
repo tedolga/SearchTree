@@ -25,4 +25,8 @@ public class Phrase {
     public LinkedList<String> getTail() {
         return tail;
     }
+
+    public void setTail(LinkedList<String> tail) {
+        this.tail = tail;
+    }
 }
