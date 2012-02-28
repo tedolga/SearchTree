@@ -12,14 +12,28 @@ public class Phrase {
     private LinkedList<String> body = new LinkedList<String>();
     private LinkedList<String> tail = new LinkedList<String>();
 
-    public Phrase(List<String> phrase) {
-        for (String word : phrase) {
-            body.add(word);
-        }
-    }
-
     public LinkedList<String> getBody() {
         return body;
+    }
+
+    public void setBody(LinkedList<String> body) {
+        this.body = body;
+    }
+
+    public void copyBody(List<String> body) {
+        LinkedList<String> newBody = new LinkedList<String>();
+        for (String next : body) {
+            newBody.add(next);
+        }
+        this.body = newBody;
+    }
+
+    public void copyTail(List<String> tail) {
+        LinkedList<String> newTail = new LinkedList<String>();
+        for (String next : tail) {
+            newTail.add(next);
+        }
+        this.tail = newTail;
     }
 
     public LinkedList<String> getTail() {
