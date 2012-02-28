@@ -41,8 +41,8 @@ public class BranchGenerator {
             if (childElement.getChildren().size() > 0) {
                 children = receiveLeaves(childElement);
             } else {
-                leaves.add(childElement);
             }
+            leaves.add(childElement);
         }
         return leaves;
     }

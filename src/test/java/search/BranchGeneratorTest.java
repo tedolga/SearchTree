@@ -21,14 +21,14 @@ public class BranchGeneratorTest {
         phrase.copyTail(words);
         BranchElement root = new BranchElement(null);
         root.setValue(phrase);
-//        List<BranchElement> leaves=BranchGenerator.receiveLeaves(root);
-//        Assert.assertEquals(leaves.size(),0);
+        List<BranchElement> leaves = BranchGenerator.receiveLeaves(root);
+        Assert.assertEquals(leaves.size(), 0);
         BranchElement firstChild = new BranchElement(root);
         root.getChildren().add(firstChild);
-//        Assert.assertEquals(BranchGenerator.receiveLeaves(root).size(),1);
+        Assert.assertEquals(BranchGenerator.receiveLeaves(root).size(), 1);
         BranchElement secondChild = new BranchElement(root);
         root.getChildren().add(secondChild);
-//        Assert.assertEquals(BranchGenerator.receiveLeaves(root).size(),2);
+        Assert.assertEquals(BranchGenerator.receiveLeaves(root).size(), 2);
         BranchElement subChild = new BranchElement(firstChild);
         firstChild.getChildren().add(subChild);
         Assert.assertEquals(BranchGenerator.receiveLeaves(root).size(), 2);
