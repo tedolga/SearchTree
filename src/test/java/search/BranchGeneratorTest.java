@@ -1,6 +1,7 @@
 package search;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -11,27 +12,52 @@ import java.util.List;
  * @version 1.0
  */
 public class BranchGeneratorTest {
-    @Test
-    public void testReceiveLeaves() throws Exception {
-        List<String> words = new ArrayList<String>();
+    private List<String> words = new ArrayList<String>();
+    private BranchElement root;
+    private Phrase phrase;
+
+    @Before
+    public void setUp() {
+        root = new BranchElement(null);
+        phrase = new Phrase();
         words.add("The");
         words.add("Best");
         words.add("Film");
-        Phrase phrase = new Phrase();
         phrase.copyTail(words);
-        BranchElement root = new BranchElement(null);
         root.setValue(phrase);
+
+    }
+
+    @Test
+    public void testReceiveLeaves() throws Exception {
         List<BranchElement> leaves = BranchGenerator.receiveLeaves(root);
-        Assert.assertEquals(leaves.size(), 0);
+        Assert.assertEquals(leaves.size(), 1);
         BranchElement firstChild = new BranchElement(root);
-        root.getChildren().add(firstChild);
         Assert.assertEquals(BranchGenerator.receiveLeaves(root).size(), 1);
         BranchElement secondChild = new BranchElement(root);
-        root.getChildren().add(secondChild);
         Assert.assertEquals(BranchGenerator.receiveLeaves(root).size(), 2);
         BranchElement subChild = new BranchElement(firstChild);
-        firstChild.getChildren().add(subChild);
         Assert.assertEquals(BranchGenerator.receiveLeaves(root).size(), 2);
+        BranchElement secondSubChild = new BranchElement(secondChild);
+        Assert.assertEquals(BranchGenerator.receiveLeaves(root).size(), 2);
+        BranchElement lastSubChild = new BranchElement(secondSubChild);
+        Assert.assertEquals(BranchGenerator.receiveLeaves(root).size(), 2);
+        BranchElement theLatestSubChild = new BranchElement(secondSubChild);
+        Assert.assertEquals(BranchGenerator.receiveLeaves(root).size(), 3);
+    }
 
+    @Test
+    public void testCheckLLeaves() {
+        List<BranchElement> leaves = BranchGenerator.receiveLeaves(root);
+        Assert.assertFalse(BranchGenerator.checkLeaves(leaves));
+        Phrase secondPhrase = new Phrase();
+        words.add("The");
+        words.add("Best");
+        words.add("Film");
+        secondPhrase.copyBody(words);
+        BranchElement child = new BranchElement(root);
+        child.setValue(secondPhrase);
+        leaves = BranchGenerator.receiveLeaves(root);
+        Assert.assertTrue(BranchGenerator.checkLeaves(leaves));
     }
 }

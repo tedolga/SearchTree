@@ -34,29 +34,47 @@ public class BranchGenerator {
 //        return branches;
 //    }
 
+    /**
+     * This method returns all the leaves of element
+     *
+     * @param element which leaves you want to get
+     * @return list of leaves
+     */
     public static List<BranchElement> receiveLeaves(BranchElement element) {
         List<BranchElement> leaves = new ArrayList<BranchElement>();
         List<BranchElement> children = element.getChildren();
-        for (BranchElement childElement : children) {
-            if (childElement.getChildren().size() > 0) {
-                children = receiveLeaves(childElement);
-            } else {
+        if (children.size() > 0) {
+            for (BranchElement childElement : children) {
+                if (childElement.getChildren().size() > 0) {
+                    children = receiveLeaves(childElement);
+                    for (BranchElement child : children) {
+                        leaves.add(child);
+                    }
+                } else {
+                    leaves.add(childElement);
+                }
             }
-            leaves.add(childElement);
+        } else {
+            leaves.add(element);
         }
         return leaves;
     }
 
-//    public static boolean checkLeaves(List<BranchElement> branchElements) {
-//        boolean isCompleted = true;
-//        for (BranchElement nextElement : branchElements) {
-//            Phrase lastElement = nextBranch.getElements().getLast();
-//            if (lastElement.getTail().size() >= 1) {
-//                isCompleted = false;
-//            }
-//        }
-//        return isCompleted;
-//    }
+    /**
+     * This method checks, if branch processing is completed (all leaves values haven't tails)
+     *
+     * @param leaves leaves of a branch
+     * @return true in case of all leaves values haven't tails, false - in other case
+     */
+    public static boolean checkLeaves(List<BranchElement> leaves) {
+        boolean isCompleted = true;
+        for (BranchElement leave : leaves) {
+            if (leave.getValue().getTail().size() > 0) {
+                isCompleted = false;
+            }
+        }
+        return isCompleted;
+    }
 
 //    public static void main(String[] args) {
 //        List<String> words = new ArrayList<String>();

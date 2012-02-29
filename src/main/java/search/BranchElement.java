@@ -14,6 +14,9 @@ public class BranchElement {
 
     public BranchElement(BranchElement parent) {
         this.parent = parent;
+        if (parent != null) {
+            parent.getChildren().add(this);
+        }
     }
 
     public List<BranchElement> getChildren() {
