@@ -19,22 +19,6 @@ public class Phrase {
         this.body = body;
     }
 
-    public LinkedList copyBody() {
-        LinkedList<String> newBody = new LinkedList<String>();
-        for (String next : body) {
-            newBody.add(next);
-        }
-        return newBody;
-    }
-
-    public LinkedList copyTail() {
-        LinkedList<String> newTail = new LinkedList<String>();
-        for (String next : tail) {
-            newTail.add(next);
-        }
-        return newTail;
-    }
-
     public LinkedList<String> getTail() {
         return tail;
     }

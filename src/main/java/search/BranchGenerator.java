@@ -14,14 +14,14 @@ public class BranchGenerator {
         List<BranchElement> leaves = receiveLeaves(root);
         while (!checkLeaves(leaves)) {
             for (BranchElement leave : leaves) {
-                LinkedList<String> tail = leave.getValue().getTail();
+                LinkedList<String> tail = copyList(leave.getValue().getTail());
                 LinkedList<String> newTail = new LinkedList<String>();
                 final int tailSize = tail.size();
                 for (int i = 0; i < tailSize; i++) {
                     BranchElement newChild = new BranchElement(leave);
                     Phrase childPhrase = new Phrase();
-                    childPhrase.setBody(tail);
-                    childPhrase.setTail(newTail);
+                    childPhrase.setBody(copyList(tail));
+                    childPhrase.setTail(copyList(newTail));
                     newTail.addFirst(tail.removeLast());
                     newChild.setValue(childPhrase);
                     leave.getChildren().add(newChild);
@@ -102,4 +102,12 @@ public class BranchGenerator {
 //            System.out.println(branches.size());
 //        }
 //    }
+
+    public static LinkedList<String> copyList(List<String> list) {
+        LinkedList<String> newList = new LinkedList<String>();
+        for (String next : list) {
+            newList.add(next);
+        }
+        return newList;
+    }
 }
