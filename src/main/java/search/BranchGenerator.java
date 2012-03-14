@@ -24,7 +24,6 @@ public class BranchGenerator {
                     childPhrase.setTail(copyList(newTail));
                     newTail.addFirst(tail.removeLast());
                     newChild.setValue(childPhrase);
-                    leave.getChildren().add(newChild);
                 }
             }
             leaves = receiveLeaves(root);
@@ -74,34 +73,6 @@ public class BranchGenerator {
         return isCompleted;
     }
 
-//    public static void main(String[] args) {
-//        List<String> words = new ArrayList<String>();
-//        words.add("The");
-//        words.add("Best");
-//        words.add("Film");
-//        Phrase phrase = new Phrase();
-//        phrase.copyTail(words);
-//        Branch branch = new Branch();
-//        BranchElement root=new BranchElement(null);
-//        root.setValue(phrase);
-//        branch.getElements().add(root);
-//        List<Branch> newBranches = new LinkedList<Branch>();
-//        while (!checkBranches(branches)) {
-//            for (Branch nextBranch : branches) {
-//                Phrase lastElement = nextBranch.getElements().getLast();
-//                List<Branch> generatedBranches = generateBranches(lastElement, nextBranch);
-//                for (Branch generatedBranch : generatedBranches) {
-//                    newBranches.add(generatedBranch);
-//                }
-//            }
-//
-//
-//            for (Branch newBranch : newBranches) {
-//                branches.add(newBranch);
-//            }
-//            System.out.println(branches.size());
-//        }
-//    }
 
     public static LinkedList<String> copyList(List<String> list) {
         LinkedList<String> newList = new LinkedList<String>();

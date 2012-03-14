@@ -22,7 +22,7 @@ public class BranchGeneratorTest {
         words.add("The");
         words.add("Best");
         words.add("Film");
-        phrase.setTail(words);
+        phrase.setTail(BranchGenerator.copyList(words));
         root.setValue(phrase);
 
     }
@@ -53,7 +53,7 @@ public class BranchGeneratorTest {
         words.add("The");
         words.add("Best");
         words.add("Film");
-        secondPhrase.copyBody(words);
+        secondPhrase.setBody(BranchGenerator.copyList(words));
         BranchElement child = new BranchElement(root);
         child.setValue(secondPhrase);
         leaves = BranchGenerator.receiveLeaves(root);
