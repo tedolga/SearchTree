@@ -1,6 +1,7 @@
 package search;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -9,30 +10,27 @@ import java.util.List;
  */
 public class BranchGenerator {
 
-//    public static List<Branch> generateBranches(Phrase phrase, Branch parentBranch) {
-//        List<Branch> branches = new ArrayList<Branch>();
-//        Phrase tempPhrase = new Phrase();
-//        tempPhrase.copyTail(phrase.getTail());
-//        LinkedList<String> tail = tempPhrase.getTail();
-//        LinkedList<String> newTail = new LinkedList<String>();
-//        final int tailSize = tail.size();
-//        for (int i = 0; i < tailSize; i++) {
-//            Phrase childPhrase = new Phrase();
-//            childPhrase.copyBody(tail);
-//            childPhrase.copyTail(newTail);
-//            newTail.addFirst(tail.removeLast());
-//            if (tail.size() > 0) {
-//                Branch childBranch = new Branch();
-//                childBranch.copyFromParent(parentBranch.getElements());
-//                childBranch.getElements().add(childPhrase);
-//                branches.add(childBranch);
-//            } else {
-//                parentBranch.getElements().add(childPhrase);
-//            }
-//        }
-//
-//        return branches;
-//    }
+    public static BranchElement generateBranches(BranchElement root) {
+        List<BranchElement> leaves = receiveLeaves(root);
+        while (!checkLeaves(leaves)) {
+            for (BranchElement leave : leaves) {
+                LinkedList<String> tail = leave.getValue().getTail();
+                LinkedList<String> newTail = new LinkedList<String>();
+                final int tailSize = tail.size();
+                for (int i = 0; i < tailSize; i++) {
+                    BranchElement newChild = new BranchElement(leave);
+                    Phrase childPhrase = new Phrase();
+                    childPhrase.copyBody(tail);
+                    childPhrase.copyTail(newTail);
+                    newTail.addFirst(tail.removeLast());
+                    newChild.setValue(childPhrase);
+                    leave.getChildren().add(newChild);
+                }
+            }
+            leaves = receiveLeaves(root);
+        }
+        return root;
+    }
 
     /**
      * This method returns all the leaves of element

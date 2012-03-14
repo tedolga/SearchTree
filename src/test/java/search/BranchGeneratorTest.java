@@ -14,12 +14,11 @@ import java.util.List;
 public class BranchGeneratorTest {
     private List<String> words = new ArrayList<String>();
     private BranchElement root;
-    private Phrase phrase;
 
     @Before
     public void setUp() {
         root = new BranchElement(null);
-        phrase = new Phrase();
+        Phrase phrase = new Phrase();
         words.add("The");
         words.add("Best");
         words.add("Film");
@@ -60,4 +59,12 @@ public class BranchGeneratorTest {
         leaves = BranchGenerator.receiveLeaves(root);
         Assert.assertTrue(BranchGenerator.checkLeaves(leaves));
     }
+
+    @Test
+    public void testGenerateBranches() {
+        BranchElement finalElement = BranchGenerator.generateBranches(root);
+        System.out.println();
+    }
+
+
 }
