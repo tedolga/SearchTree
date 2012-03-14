@@ -1,7 +1,6 @@
 package search;
 
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * @author O. Tedikova
@@ -20,20 +19,20 @@ public class Phrase {
         this.body = body;
     }
 
-    public void copyBody(List<String> body) {
+    public LinkedList copyBody() {
         LinkedList<String> newBody = new LinkedList<String>();
         for (String next : body) {
             newBody.add(next);
         }
-        this.body = newBody;
+        return newBody;
     }
 
-    public void copyTail(List<String> tail) {
+    public LinkedList copyTail() {
         LinkedList<String> newTail = new LinkedList<String>();
         for (String next : tail) {
             newTail.add(next);
         }
-        this.tail = newTail;
+        return newTail;
     }
 
     public LinkedList<String> getTail() {

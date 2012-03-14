@@ -20,8 +20,8 @@ public class BranchGenerator {
                 for (int i = 0; i < tailSize; i++) {
                     BranchElement newChild = new BranchElement(leave);
                     Phrase childPhrase = new Phrase();
-                    childPhrase.copyBody(tail);
-                    childPhrase.copyTail(newTail);
+                    childPhrase.setBody(tail);
+                    childPhrase.setTail(newTail);
                     newTail.addFirst(tail.removeLast());
                     newChild.setValue(childPhrase);
                     leave.getChildren().add(newChild);

@@ -22,7 +22,7 @@ public class BranchGeneratorTest {
         words.add("The");
         words.add("Best");
         words.add("Film");
-        phrase.copyTail(words);
+        phrase.setTail(words);
         root.setValue(phrase);
 
     }
