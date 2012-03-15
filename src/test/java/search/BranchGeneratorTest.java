@@ -62,8 +62,9 @@ public class BranchGeneratorTest {
 
     @Test
     public void testGenerateBranches() {
-        BranchElement finalElement = BranchGenerator.generateBranches(root);
-        System.out.println();
+        BranchGenerator.generateBranches(root);
+        Assert.assertEquals(3, root.getChildren().size());
+        Assert.assertEquals(4, BranchGenerator.receiveLeaves(root).size());
     }
 
 

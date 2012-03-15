@@ -42,4 +42,5 @@ public class BranchElement {
     public void setValue(Phrase value) {
         this.value = value;
     }
+
 }

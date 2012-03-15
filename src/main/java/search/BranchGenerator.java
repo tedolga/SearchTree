@@ -1,14 +1,25 @@
 package search;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author O. Tedikova
  * @version 1.0
  */
 public class BranchGenerator {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String searchString = scanner.nextLine();
+        List<String> phraseTail = Arrays.asList(searchString.split(" "));
+        Phrase phrase = new Phrase();
+        phrase.setTail(copyList(phraseTail));
+        BranchElement root = new BranchElement(null);
+        root.setValue(phrase);
+        generateBranches(root);
+        LinkedList<String> branches = receiveChains(root);
+        System.out.println();
+    }
 
     public static BranchElement generateBranches(BranchElement root) {
         List<BranchElement> leaves = receiveLeaves(root);
@@ -81,4 +92,23 @@ public class BranchGenerator {
         }
         return newList;
     }
+
+    public static LinkedList<String> receiveChains(BranchElement tree) {
+        LinkedList<String> result = new LinkedList<String>();
+        List<BranchElement> leaves = BranchGenerator.receiveLeaves(tree);
+        StringBuilder builder = new StringBuilder();
+        for (BranchElement leave : leaves) {
+            builder.append(leave.getValue().getBody().toString());
+            BranchElement parent = leave.getParent();
+            while (parent != null) {
+                builder.append(parent.getValue().getBody().toString());
+                parent = parent.getParent();
+            }
+            result.addFirst(builder.toString());
+            builder.setLength(0);
+        }
+        return result;
+    }
+
+
 }
